@@ -40,3 +40,9 @@ jobs:
 
       - name: clear s3 bucket
         run: aws s3 rm s3://www.teenkiri.store/ --recursive
+
+      - name: deploy s3 bucket
+        run: aws s3 cp ./dist s3://www.teenkiri.store/ --recursive
+
+      - name: invalidate cloudfront caches
+        run: aws cloudfront create-invalidation --distribution-id E2QE6RHM0RKK5X --paths "/*"
